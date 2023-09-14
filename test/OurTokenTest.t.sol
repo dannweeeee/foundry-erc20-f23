@@ -27,8 +27,21 @@ contract OurTokenTest is Test {
         assertEq(STARTING_BALANCE, ourToken.balanceOf(bob));
     }
 
-    function testAllowances() public {
+    function testAllowanceWorks() public {
         // transferFrom function for ERC20s --> in order for it to take tokens from you, you will need to allow it first
-        
+        uint256 initialAllowance = 1000;
+
+        // Bob approves Alice to spend tokens on his behalf
+        vm.prank(bob);
+        ourToken.approve(alice, initialAllowance);
+
+        uint256 transferAmount = 500;
+
+        vm.prank(alice);
+        ourToken.transferFrom(bob, alice, transferAmount);
+        // ourToken.transfer(bob, transferAmount); // whoever who is calling this transfer function is automatically set as the from (msg.sender)
+
+        assertEq(ourToken.balanceOf(alice), transferAmount);
+        assertEq(ourToken.balanceOf(bob), STARTING_BALANCE - transferAmount);
     }
 }

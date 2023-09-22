@@ -15,7 +15,7 @@ A Foundry ERC20 Project that is part of Cyfrin Solidity Blockchain Course.
 ## Quickstart
 
 ```
-git clone https://github.com/Cyfrin/foundry-erc20-f23
+git clone https://github.com/dannweeeee/foundry-erc20-f23
 cd foundry-erc20-f23
 forge install 
 forge build
